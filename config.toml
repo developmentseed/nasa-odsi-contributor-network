@@ -6,82 +6,42 @@ organization_nickname = "ODSI"
 
 # Repositories
 repositories = [
-    "developmentseed/titiler",
-    "developmentseed/lonboard",
-    "developmentseed/obstore",
-    "developmentseed/eoAPI",
-    "developmentseed/eoapi-k8s",
-    "developmentseed/eoapi-cdk",
-    "developmentseed/geojson-pydantic",
-    "developmentseed/tipg",
-    "developmentseed/rio-viz",
-    "developmentseed/rio-stac",
-    "developmentseed/osm-seed",
-    "developmentseed/osm-teams",
-    "developmentseed/morecantile",
-    "developmentseed/cql2-rs",
-    "developmentseed/stac-auth-proxy",
-    "stac-utils/pystac",
-    "stac-utils/stac-fastapi",
-    "stac-utils/stac-fastapi-pgstac",
-    "stac-utils/pgstac",
-    "stac-utils/pystac-client",
-    "stac-utils/rustac",
-    "opengeospatial/geoparquet",
-    "radiantearth/stac-spec",
-    "radiantearth/stac-api-spec",
-    "geoarrow/geoarrow-rs",
-    "geoarrow/deck.gl-layers",
-    "geoarrow/geoarrow",
-    "zarr-developers/VirtualiZarr",
-    "zarr-developers/zarr-python",
-    "pydata/xarray",
-    "sentinel-hub/titiler-openeo",
-    "Clay-foundation/model",
-    "OSMCha/osmcha-django",
-    "OSMCha/osmcha-frontend",
-    "hotosm/tasking-manager",
-    "hotosm/OpenAerialMap",
-    "developmentseed/openeo-studio",
-    "NASA-IMPACT/veda-backend",
-    "developmentseed/moz-proenergia-backend",
-    "wri/project-zeno",
-    "wri/project-zeno-next",
-    "wri/project-zeno-deploy",
-    "wri/gnw-evals",
-    "wri/gnw-stac",
-    "developmentseed/titiler-cmr",
-    "NASA-IMPACT/veda-ui",
-    "developmentseed/async-tiff",
-    "NASA-IMPACT/veda-deploy",
-    "eopf-toolkit/eopf-101",
-    "NASA-IMPACT/veda-keycloak",
-    "NASA-IMPACT/veda-data-airflow",
-    "EOPF-Explorer/titiler-eopf",
-    "developmentseed/openeo-udp",
-    "developmentseed/stac-map",
-    "source-cooperative/source.coop",
-    "NASA-IMPACT/csda-client",
-    "NASA-IMPACT/veda-config",
-    "developmentseed/eo-predictor",
-    "EOPF-Explorer/landing-page",
-    "EOPF-Explorer/narratives",
-    "EOPF-Explorer/data-model",
-    "EOPF-Explorer/data-pipeline",
-    "developmentseed/deck.gl-raster",
-    "MAAP-Project/maap-eoapi",
-    "MAAP-Project/maap-documentation",
-    "EOEPCA/demo",
-    "EOEPCA/resource-discovery",
-    "EOEPCA/data-access",
-    "EOEPCA/eoepca-plus",
-    "virtual-zarr/obspec-utils",
-    "developmentseed/geotiff-test-data",
-    "GenericMappingTools/pygmt",
-    "developmentseed/pixelverse",
-    "NASA-IMPACT/veda-odd",
-    "Disasters-Learning-Portal/veda-disasters",
-    "ecmwf/qubed",
+"apache/arrow-rs",
+ "boettiger-lab/earthdatalogin",
+ "conda-forge/r-lasr-feedstock",
+ "cloudnativegeo/cloud-optimized-geospatial-formats-guide",
+ "datafusion-contrib/arrow-zarr",
+ "earth-mover/icechunk",
+ "flatgeobuf/flatgeobuf",
+ "geoarrow/deck.gl-layers",
+ "geoarrow/geoarrow-rs",
+ "geopandas/geopandas",
+ "georust/geo-svg",
+ "holoviz/hvplot",
+ "jupyterhub/repo2docker",
+ "pangeo-data/pangeo-docker-images",
+ "pangeo-data/pangeo.io",
+ "nasa/python_cmr",
+ "nasa-openscapes/earthdata-cloud-cookbook",
+ "nsidc/earthaccess",
+ "nsidc/cloud-optimized-icesat2",
+ "numbagg/numbagg",
+ "pydata/xarray",
+ "radiantearth/stac-spec",
+ "stac-extensions/zarr",
+ "stac-utils/stac-fastapi-pgstac",
+ "stac-utils/rustac-py",
+ "stac-utils/pgstac",
+ "stac-utils/pystac",
+ "stac-utils/pystac-client",
+ "stac-utils/xpystac",
+ "virtual-zarr/hrrr-parser",
+ "virtual-zarr/virtual-tiff",
+ "virtual-zarr/obspec-utils",
+ "zarr-developers/zarr-python",
+ "zarr-developers/geozarr-spec",
+ "zarr-developers/VirtualiZarr",
+ "2i2c-org/jupyterhub-fancy-profiles",
 ]
 
 [branding]
@@ -91,9 +51,7 @@ text_color = "#000000"
 
 # Core organization contributors
 [contributors.core]
-AMSCamacho = "Angela Camacho"
 AliceR = "Alice Rühl"
-LanesGood = "Lane Goodman"
 abarciauskas-bgse = "Aimee Barciauskas"
 aboydnw = "Anthony Boyd"
 aliziel = "Ali Z"
@@ -109,38 +67,32 @@ ceholden = "Chris Holden"
 chuckwondo = "Chuck Daniels"
 ciaransweet = "Ciaran Sweet"
 danielfdsilva = "Daniel da Silva"
-dannybauman = "Danny Bauman"
+d-v-b = "Davis Bennett"
 dzole0311 = "Gjore Milevski"
 emmalu = "Emma Paz"
-emmanuelmathot = "Emmanuel Mathot"
 faustoperez = "Fausto Pérez"
 gadomski = "Pete Gadomski"
-geohacker = "Sajjad Anwar"
 hanbyul-here = "Hanbyul Jo"
 hrodmn = "Henry Rodman"
-ianschuler = "Ian Schuler"
 ifsimicoded = "Simi Damani"
 indraneel = "Indraneel Purohit"
 ividito = "Isayah Vidito"
 j08lue = "Jonas Sølvsteen"
 jjfrench = "Jamison French"
+jsignell = "Julia Signell"
+jbusecke = "Julius Busecke"
 kamicut = "Marc Farra"
-kcarini = "Kiri Carini"
-kevinbullock = "Kevin Bullock"
-kimmurph = "Kim Murphy"
 kylebarron = "Kyle Barron"
 leothomas = "Leo Thomas"
 lillythomas = "Lilly Thomas"
 lhoupert = "Loïc Houpert"
 maxrjones = "Max Jones"
 martham93 = "Martha Morrissey"
-olafveerman = "Olaf Veerman"
-omniajoe = "Omnia Joehar"
-pantierra = "xıʃǝɟ"
-ricardoduplos = "Ricardo Duplos"
+moradology = "Nathan Zimmermann"
+negin513 = "Negin Sobhani"
 sandrahoang686 = "Sandra Hoang"
 sharkinsspatial = "Sean Harkins"
-sharonwanlu = "SharonLu"
+smk0033 = "Sheyenne Kirkland"
 smohiudd = "Saadiq Mohiuddin"
 srmsoumya = "Soumya Ranjan Mohanty"
 sunu = "Tarashish Mishra"
