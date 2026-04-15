@@ -1,8 +1,8 @@
 # Organization Metadata
-title = "The Development Seed Contributor Network"
-description = "An interactive visualization of contributors to Development Seed code and their connections to other repositories"
-organization_name = "Development Seed"
-organization_nickname = "DevSeed"
+title = "The NASA ODSI Contributor Network"
+description = "An interactive visualization of the reach and impact of NASA ODSI's contributions to open source repositories."
+organization_name = "NASA ODSI"
+organization_nickname = "ODSI"
 
 # Repositories
 repositories = [
