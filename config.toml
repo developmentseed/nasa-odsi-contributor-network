@@ -85,9 +85,9 @@ repositories = [
 ]
 
 [branding]
-primary_color = "#CF3F02"
-secondary_color = "#2E86AB"
-text_color = "#443F3F"
+primary_color = "#133966"
+secondary_color = "#2A79DB"
+text_color = "#000000"
 
 # Core organization contributors
 [contributors.core]
