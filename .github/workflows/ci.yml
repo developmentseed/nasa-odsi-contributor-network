@@ -16,18 +16,12 @@ jobs:
       - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version-file: ".nvmrc"
-          cache: "npm"
-      - run: npm ci
-      - uses: astral-sh/ruff-action@4919ec5cf1f49eff0871dbcea0da843445b837e6 # v3
-      - name: Format
-        run: ruff format --check --diff
-      - name: Type check (Python)
-        run: uv run mypy
-      - name: Test (Python)
-        run: uv run pytest
-      - name: Type check (TypeScript)
-        run: npm run typecheck
-      - name: Test (TypeScript)
-        run: npm test
+      - run: uv sync
+      - name: Validate config.toml against upstream schema
+        run: uv run pytest python/tests/test_config.py -v
+      - name: Check upstream pin drift
+        run: scripts/check-pin-drift.py
       - name: Build
-        run: uv run contributor-network build
+        run: scripts/build.sh
+        env:
+          PLAUSIBLE_ID: ${{ vars.PLAUSIBLE_ID }}
