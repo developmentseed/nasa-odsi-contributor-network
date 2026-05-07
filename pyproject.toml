@@ -1,37 +1,16 @@
 [project]
-name = "contributor-network"
+name = "nasa-odsi-contributor-network"
 version = "0.1.0"
-description = "A visualization of contributors to projects"
-readme = "README.md"
+description = "NASA ODSI contributor network site (overlay over developmentseed/contributor-network)"
 requires-python = ">=3.13"
 dependencies = [
-    "click>=8.2.1",
-    "pydantic>=2.11.9",
-    "pygithub>=2.8.1",
+    "contributor-network @ git+https://github.com/developmentseed/contributor-network@main",
 ]
-
-[project.scripts]
-contributor-network = "contributor_network.cli:main"
 
 [dependency-groups]
 dev = [
-    "mypy>=1.18.1",
     "pytest>=8.4.2",
-    "ruff>=0.13.0",
 ]
-
-[tool.mypy]
-files = ["python"]
-
-[tool.ruff.lint]
-select = ["E", "F", "W", "I"]
 
 [tool.pytest.ini_options]
 testpaths = ["python/tests"]
-
-[tool.hatch.build.targets.wheel]
-packages = ["python/contributor_network"]
-
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
