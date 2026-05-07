@@ -1,0 +1,56 @@
+name: Bump upstream contributor-network
+
+on:
+  schedule:
+    - cron: "0 8 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/create-github-app-token@f8d387b68d61c58ab83c6c016672934102569859 # v3.0.0
+        id: generate-token
+        with:
+          app-id: ${{ secrets.DS_RELEASE_BOT_ID }}
+          private-key: ${{ secrets.DS_RELEASE_BOT_PRIVATE_KEY }}
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
+      - uses: astral-sh/setup-uv@cec208311dfd045dd5311c1add060b2062131d57 # v8.0.0
+      - name: Run bump script
+        id: bump
+        run: |
+          OLD_SHA="$(cat .upstream-ref)"
+          uv lock --upgrade-package contributor-network
+          NEW_SHA="$(scripts/extract-upstream-sha.py)"
+          if [ "$OLD_SHA" = "$NEW_SHA" ]; then
+            echo "no_change=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "$NEW_SHA" > .upstream-ref
+          echo "old_sha=$OLD_SHA" >> "$GITHUB_OUTPUT"
+          echo "new_sha=$NEW_SHA" >> "$GITHUB_OUTPUT"
+      - name: Open PR
+        if: steps.bump.outputs.no_change != 'true'
+        env:
+          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
+          OLD_SHA: ${{ steps.bump.outputs.old_sha }}
+          NEW_SHA: ${{ steps.bump.outputs.new_sha }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          BRANCH="bump-upstream-$(echo "$NEW_SHA" | head -c 8)"
+          git checkout -b "$BRANCH"
+          git add .upstream-ref uv.lock
+          git commit -m "chore: bump upstream contributor-network to ${NEW_SHA}"
+          git push -u origin "$BRANCH"
+          gh pr create \
+            --title "chore: bump upstream to ${NEW_SHA:0:8}" \
+            --body "Bumps upstream \`contributor-network\` from \`${OLD_SHA:0:8}\` to \`${NEW_SHA:0:8}\`.
+
+Compare: https://github.com/developmentseed/contributor-network/compare/${OLD_SHA}...${NEW_SHA}"
