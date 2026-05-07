@@ -1,113 +1,68 @@
-# Development Seed Contributor Network
+# NASA ODSI Contributor Network
 
-The code behind <https://developmentseed.org/contributor-network>.
+An interactive visualization of NASA ODSI's contributions to open-source projects.
 
 <img src="./public/img/site-image.jpg" height="600px" />
 
+This repo is a thin overlay over [`developmentseed/contributor-network`](https://github.com/developmentseed/contributor-network). All visualization code (Python CLI + frontend) lives upstream; this repo holds NASA-specific configuration, branding, and generated data.
+
 This visual is derived from the excellent [ORCA top-contributor-network](https://github.com/nbremer/ORCA/tree/main/top-contributor-network) by Nadieh Bremer.
 
-## Usage
+## Local development
 
-To view the site locally with hot module replacement:
-
-```sh
-npm run dev
-```
-
-## Development
-
-Get [uv](https://docs.astral.sh/uv/getting-started/installation/), [Node.js](https://nodejs.org/) 18+, and a GitHub personal access token with `public_repo` scope (e.g. via `gh auth token` if you have the [Github CLI](https://cli.github.com/)).
+Install dependencies:
 
 ```sh
-uv sync
-npm install
+uv sync       # installs the upstream Python CLI pinned by uv.lock
 ```
 
-If you've only made changes to the frontend, you can rebuild the site with:
+Start a dev server:
 
 ```sh
-uv run contributor-network build
+scripts/dev.sh
+# Open http://localhost:8000/
 ```
 
-If you've changed the config and need to re-fetch data from the Github API, run this (warning, this takes a while):
+`scripts/dev.sh` syncs the upstream repo into `.upstream-cache/` (gitignored), overlays our `config.toml`, branding assets, and generated data, then runs Vite from inside the cache. Edits to overlay files (`config.toml`, etc.) require restarting the script to take effect.
+
+## Build
+
+Produces `dist/`:
+
+```sh
+scripts/build.sh
+```
+
+## Refresh data
 
 ```sh
 export GITHUB_TOKEN="your_token_here"
 uv run contributor-network fetch
+uv run contributor-network build --directory public/data
 ```
 
-To list all configured contributors by category:
+The weekly `Build data` GitHub Action does this automatically and opens a PR.
 
-```shell
-uv run contributor-network list-contributors
-```
+## Bump upstream
 
-To find new repositories that DevSeed employees contribute to:
+The `Bump upstream contributor-network` workflow runs weekly and opens a PR when upstream `main` advances. To bump manually:
 
-```shell
-uv run contributor-network discover --min-contributors 2 --limit 50
-```
-
-This queries GitHub to find repos where multiple DevSeed employees have contributed, which are not yet in the configuration.
-
-### Full workflow
-
-To update the visualization with new data:
-
-```shell
-# 1. Set your GitHub token
-export GITHUB_TOKEN="your_token_here"
-
-# 2. (Optional) Discover new repos to add
-uv run contributor-network discover --min-contributors 2
-
-# 3. Edit config.toml to add/remove repos or contributors
-
-# 4. Fetch data from GitHub
-uv run contributor-network fetch
-
-# 5. Build the site
-uv run contributor-network build
-
-# 6. Preview locally
-npm run preview
-```
-
-### Tests
-
-```shell
-npm test
-uv run pytest
-```
-
-### Type checking
-
-```shell
-npm run typecheck
-```
-
-### Lints
-
-```shell
-uv run ruff check --fix
-uv run ruff format
+```sh
+scripts/bump-upstream.sh
+git add .upstream-ref uv.lock
+git commit -m "chore: bump upstream to <sha>"
 ```
 
 ## Configuration
 
-Edit `config.toml` to configure:
+Edit `config.toml` to control:
 
-- **repositories**: List of GitHub repos to track (format: `"owner/repo"`)
-- **contributors.devseed**: Current DevSeed employees (format: `github_username = "Display Name"`)
-- **contributors.alumni**: Friends and alumni (commented out by default)
-
-## Branding
-
-This visualization uses the Development Seed brand colors:
-- **Grenadier** (#CF3F02): Primary orange accent
-- **Aquamarine** (#2E86AB): Secondary blue
-- **Base** (#443F3F): Text color
+- **repositories** — GitHub repos to track (`"owner/repo"` format)
+- **contributors.core** — NASA ODSI contributors (`github_username = "Display Name"`)
+- **branding** — site colors (`primary_color`, `secondary_color`, `text_color`)
+- **og_url, og_image, theme_color** — SEO meta tags
+- **`.upstream-ref`** (separate file) — SHA of the upstream commit this site builds from
 
 ## License
 
-This work was copied-and-modified from <https://github.com/nbremer/ORCA> and is licensed under the same (MPL).
+Derived from [ORCA top-contributor-network](https://github.com/nbremer/ORCA/tree/main/top-contributor-network) by Nadieh Bremer and licensed under MPL.
