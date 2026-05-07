@@ -226,3 +226,6 @@ node_modules/
 .superpowers/
 .playwright-mcp/
 .worktrees/
+
+# Upstream cache (degit'd into here by scripts/build.sh)
+.upstream-cache/
