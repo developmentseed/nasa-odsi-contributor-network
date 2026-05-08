@@ -28,12 +28,11 @@ jobs:
       - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version-file: ".nvmrc"
-          cache: "npm"
-      - run: npm ci
+      - run: uv sync
       - name: Build
         env:
           PLAUSIBLE_ID: ${{ vars.PLAUSIBLE_ID }}
-        run: uv run contributor-network build
+        run: scripts/build.sh
       - uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4.0.0
         with:
           path: "dist"

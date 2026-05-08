@@ -3,6 +3,9 @@ title = "The NASA ODSI Contributor Network"
 description = "An interactive visualization of the reach and impact of NASA ODSI's contributions to open source repositories."
 organization_name = "NASA ODSI"
 organization_nickname = "ODSI"
+og_url = "https://developmentseed.github.io/nasa-odsi-contributor-network/"
+og_image = "https://developmentseed.github.io/nasa-odsi-contributor-network/site-image.jpg"
+theme_color = "#133966"
 
 # Repositories
 repositories = [
